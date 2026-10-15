@@ -38,4 +38,3 @@ restaurants.forEach((restaurant) => {
 
     restaurantList.appendChild(restaurantCard);
 });
-export default restaurants;
