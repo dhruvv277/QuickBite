@@ -85,6 +85,11 @@ function displayMenu() {
     addButton.disabled = !item.isAvailable;
 
     addButton.addEventListener("click", () => {
+      if (!item.isAvailable) {
+        alert("This item is unavailable and cannot be added.");
+        return;
+      }
+
       const quantity = parseInt(quantityInput.value);
 
       if (quantity < 1 || Number.isNaN(quantity)) {
