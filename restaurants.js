@@ -21,6 +21,7 @@ const restaurants = [
 const restaurantList = document.getElementById("restaurant-list");
 restaurants.forEach((restaurant) => {
     const restaurantCard = document.createElement("div");
+    restaurantCard.className = "restaurant-card";
 
     restaurantCard.innerHTML = `
         <h3>${restaurant.name}</h3>
@@ -33,7 +34,7 @@ restaurants.forEach((restaurant) => {
 
     selectButton.addEventListener("click", () => {
         localStorage.setItem("selectedRestaurant", JSON.stringify(restaurant));
-        alert(`${restaurant.name} selected!`);
+        window.location.href = "menu.html";
     });
 
     restaurantList.appendChild(restaurantCard);
