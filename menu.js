@@ -80,17 +80,6 @@ function displayMenu() {
       ? "Available"
       : "Unavailable";
 
-    const quantityLabel = document.createElement("label");
-    quantityLabel.textContent = "Quantity: ";
-
-    const quantityInput = document.createElement("input");
-    quantityInput.type = "number";
-    quantityInput.min = "1";
-    quantityInput.value = "1";
-    quantityInput.disabled = !item.isAvailable;
-
-    quantityLabel.appendChild(quantityInput);
-
     const addButton = document.createElement("button");
     addButton.textContent = "Add to Order";
     addButton.disabled = !item.isAvailable;
