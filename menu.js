@@ -55,10 +55,15 @@ function displayMenu() {
     addButton.disabled = !item.isAvailable;
 
     addButton.addEventListener("click", () => {
-      const cartItem = createCartItem(item);
-      cart.push(cartItem);
-      alert(`${item.name} added to your order!`);
-    });
+  if (!item.isAvailable) {
+    alert("This item is unavailable and cannot be added.");
+    return;
+  }
+
+  const cartItem = createCartItem(item);
+  cart.push(cartItem);
+  alert(`${item.name} added to your order!`);
+});
 
     itemCard.append(name, price, availability, addButton);
     menuList.appendChild(itemCard);
