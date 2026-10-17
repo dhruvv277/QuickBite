@@ -13,6 +13,10 @@ const PICKUP_TIMES = [
       select.innerHTML += '<option value="' + time + '">' + time + '</option>';
     }
   }
+
+  function RestorePickupTime(){
+
+  }
   
   document.addEventListener("DOMContentLoaded", function () {
     renderPickupTimes();
