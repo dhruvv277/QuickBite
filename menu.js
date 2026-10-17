@@ -80,11 +80,25 @@ function displayMenu() {
       ? "Available"
       : "Unavailable";
 
+    // Quantity selector
+    const quantityLabel = document.createElement("label");
+    quantityLabel.textContent = "Quantity: ";
+
+    const quantityInput = document.createElement("input");
+    quantityInput.type = "number";
+    quantityInput.min = "1";
+    quantityInput.value = "1";
+    quantityInput.disabled = !item.isAvailable;
+
+    quantityLabel.appendChild(quantityInput);
+
+    // Add to Order button
     const addButton = document.createElement("button");
     addButton.textContent = "Add to Order";
     addButton.disabled = !item.isAvailable;
 
     addButton.addEventListener("click", () => {
+      // Prevent unavailable items from being added
       if (!item.isAvailable) {
         alert("This item is unavailable and cannot be added.");
         return;
