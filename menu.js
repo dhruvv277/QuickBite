@@ -2,6 +2,36 @@ const restaurantName = document.getElementById("restaurant-name");
 const menuMessage = document.getElementById("menu-message");
 const menuList = document.getElementById("menu-list");
 
+const cartItems = document.getElementById("cart-items");
+const emptyCartMessage = document.getElementById("empty-cart-message");
+
+// Display the current order
+function displayCart() {
+  cartItems.innerHTML = "";
+
+  if (cart.length === 0) {
+    emptyCartMessage.style.display = "block";
+    return;
+  }
+
+  emptyCartMessage.style.display = "none";
+
+  cart.forEach((item) => {
+    const cartItem = document.createElement("div");
+    cartItem.className = "cart-item";
+
+    const itemName = document.createElement("p");
+    itemName.textContent = `${item.name} x ${item.quantity}`;
+
+    const itemPrice = document.createElement("p");
+    itemPrice.textContent =
+      `$${(item.price * item.quantity).toFixed(2)}`;
+
+    cartItem.append(itemName, itemPrice);
+    cartItems.appendChild(cartItem);
+  });
+}
+
 function displayMenu() {
   let selectedRestaurant;
 
@@ -55,14 +85,42 @@ function displayMenu() {
     addButton.disabled = !item.isAvailable;
 
     addButton.addEventListener("click", () => {
-      const cartItem = createCartItem(item);
+      const quantity = parseInt(quantityInput.value);
+
+      if (quantity < 1 || Number.isNaN(quantity)) {
+        alert("Please select a valid quantity.");
+        return;
+      }
+
+      const cartItem = {
+        id: item.id,
+        restaurantId: item.restaurantId,
+        name: item.name,
+        price: item.price,
+        quantity: quantity
+      };
+
       cart.push(cartItem);
-      alert(`${item.name} added to your order!`);
+
+      // Update Current Order
+      displayCart();
+
+      alert(
+        `${quantity} x ${item.name} added to your order!`
+      );
     });
 
-    itemCard.append(name, price, availability, addButton);
+    itemCard.append(
+      name,
+      price,
+      availability,
+      quantityLabel,
+      addButton
+    );
+
     menuList.appendChild(itemCard);
   });
 }
 
 displayMenu();
+displayCart();
