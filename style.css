@@ -87,6 +87,7 @@ button:disabled {
 /* Quantity Input */
 
 input[type="number"] {
+    width: 100px;
     height: 40px;
     padding: 5px 10px;
     font-size: 16px;
