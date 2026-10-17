@@ -28,7 +28,8 @@ function displayMenu() {
   restaurantName.textContent = `${selectedRestaurant.name} Menu`;
 
   if (restaurantItems.length === 0) {
-    menuMessage.textContent = "No menu items are available for this restaurant.";
+    menuMessage.textContent =
+      "No menu items are available for this restaurant.";
     return;
   }
 
@@ -49,7 +50,17 @@ function displayMenu() {
       ? "Available"
       : "Unavailable";
 
-    itemCard.append(name, price, availability);
+    const addButton = document.createElement("button");
+    addButton.textContent = "Add to Order";
+    addButton.disabled = !item.isAvailable;
+
+    addButton.addEventListener("click", () => {
+      const cartItem = createCartItem(item);
+      cart.push(cartItem);
+      alert(`${item.name} added to your order!`);
+    });
+
+    itemCard.append(name, price, availability, addButton);
     menuList.appendChild(itemCard);
   });
 }
