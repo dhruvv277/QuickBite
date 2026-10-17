@@ -86,12 +86,22 @@ button:disabled {
 
 /* Quantity Input */
 
+.menu-card label {
+    display: block;
+    margin-bottom: 15px;
+}
+
 input[type="number"] {
     width: 100px;
     height: 40px;
     padding: 5px 10px;
     font-size: 16px;
     box-sizing: border-box;
+}
+
+.menu-card button {
+    display: block;
+    margin-top: 15px;
 }
 
 @media (max-width: 600px) {
