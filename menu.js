@@ -50,17 +50,52 @@ function displayMenu() {
       ? "Available"
       : "Unavailable";
 
+    const quantityLabel = document.createElement("label");
+    quantityLabel.textContent = "Quantity: ";
+
+    const quantityInput = document.createElement("input");
+    quantityInput.type = "number";
+    quantityInput.min = "1";
+    quantityInput.value = "1";
+    quantityInput.disabled = !item.isAvailable;
+
+    quantityLabel.appendChild(quantityInput);
+
     const addButton = document.createElement("button");
     addButton.textContent = "Add to Order";
     addButton.disabled = !item.isAvailable;
 
     addButton.addEventListener("click", () => {
-      const cartItem = createCartItem(item);
+      const quantity = parseInt(quantityInput.value);
+
+      if (quantity < 1 || Number.isNaN(quantity)) {
+        alert("Please select a valid quantity.");
+        return;
+      }
+
+      const cartItem = {
+        id: item.id,
+        restaurantId: item.restaurantId,
+        name: item.name,
+        price: item.price,
+        quantity: quantity
+      };
+
       cart.push(cartItem);
-      alert(`${item.name} added to your order!`);
+
+      alert(
+        `${quantity} x ${item.name} added to your order!`
+      );
     });
 
-    itemCard.append(name, price, availability, addButton);
+    itemCard.append(
+      name,
+      price,
+      availability,
+      quantityLabel,
+      addButton
+    );
+
     menuList.appendChild(itemCard);
   });
 }
