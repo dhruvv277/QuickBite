@@ -36,6 +36,7 @@ function displayMenu() {
 
   restaurantItems.forEach((item) => {
     const itemCard = document.createElement("article");
+    itemCard.className = "menu-card";
 
     const name = document.createElement("h3");
     name.textContent = item.name;
