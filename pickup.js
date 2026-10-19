@@ -21,3 +21,43 @@ const PICKUP_TIMES = [
   document.addEventListener("DOMContentLoaded", function () {
     renderPickupTimes();
   });
+  
+document.getElementById("place-order-btn").addEventListener("click", function () {
+    const pickupTime = document.getElementById("pickup-time").value;
+    const pickupError = document.getElementById("pickup-error");
+
+    pickupError.textContent = "";
+
+    if (cart.length === 0) {
+        pickupError.textContent = "Please add items to your order.";
+        return;
+    }
+
+    if (!pickupTime) {
+        pickupError.textContent = "Please select a pickup time.";
+        return;
+    }
+
+    const selectedRestaurant = JSON.parse(
+        localStorage.getItem("selectedRestaurant")
+    );
+
+    if (!selectedRestaurant) {
+        pickupError.textContent = "Please select a restaurant.";
+        return;
+    }
+
+    const order = {
+        restaurantId: selectedRestaurant.id,
+        items: cart,
+        pickupTime: pickupTime
+    };
+
+    const savedOrder = saveOrder(order);
+
+    if (savedOrder) {
+        window.location.href = "confirmation.html";
+    } else {
+        pickupError.textContent = "Unable to place order.";
+    }
+});
